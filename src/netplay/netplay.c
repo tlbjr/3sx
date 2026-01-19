@@ -560,11 +560,18 @@ void Netplay_Run() {
         break;
 
     case SESSION_IDLE:
-        // Do nothing
+        if (session != NULL) {
+            gekko_destroy(&session);
+        }
+
         break;
     }
 }
 
 bool Netplay_IsRunning() {
     return session_state != SESSION_IDLE;
+}
+
+void Netplay_HandleMenuExit() {
+    session_state = SESSION_IDLE;
 }
